@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Allaskereso-mobilalk</string>
+    <string name="app_name">Álláskereső</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Jelszó</string>
+    <string name="login_text">Bejelentkezés</string>
+    <string name="register_text">Regisztráció</string>
+    <string name="app_login_text">Álláskeresőportál</string>
+    <string name="app_register_text">Álláskereső regisztráció</string>
+    <string name="password_again_text">Jelszó megerősítés</string>
+    <string name="back_text">Vissza</string>
+    <string name="bejelentkez_s">Bejelentkezés</string>
+    <string name="regisztr_lni_szeretn_k">Regisztráció</string>
+    <string name="szak_cs">Szakács</string>
+    <string name="tel_s_ital_kft">Étel és Ital Kft.</string>
+    <string name="tehets_ges_szak_csot_keres_nk_j_l_men_tterm_nknek">Tehetséges szakácsot keresünk jól menő éttermünknek!</string>
+    <string name="jelentkezve">✓ Jelentkezve</string>
+    <string name="jelentkez_s">Jelentkezés</string>
+    <string name="jelentkez_s_lemond_sa">Jelentkezés lemondása</string>
 </resources>
