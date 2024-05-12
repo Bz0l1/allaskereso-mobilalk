@@ -16,4 +16,5 @@
     <string name="jelentkezve">✓ Jelentkezve</string>
     <string name="jelentkez_s">Jelentkezés</string>
     <string name="jelentkez_s_lemond_sa">Jelentkezés lemondása</string>
+    <string name="bejelentkez_s_loading">Bejelentkezés...</string>
 </resources>
