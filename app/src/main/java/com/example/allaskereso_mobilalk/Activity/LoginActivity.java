@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private FirebaseAuth firebaseAuth;
+    private Dialog loadingDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
     {
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
+        showLoadingDialog();
+
 
         if(email.isEmpty() || password.isEmpty())
         {
@@ -72,10 +76,12 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(success ->{
+                    hideLoadingDialog();
                     Log.d(LOG_TAG, "Successful login");
                     launchOffers();
                 })
                 .addOnFailureListener(fail -> {
+                    hideLoadingDialog();
                     Log.d(LOG_TAG, "Login failed");
                     Toast.makeText(LoginActivity.this, "Sikertelen bejelentkezés. Próbáld újra!", Toast.LENGTH_LONG).show();
                     passwordInput.setText("");
@@ -102,5 +108,18 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("email_value", emailInput.getText().toString());
         editor.putString("password_value", passwordInput.getText().toString());
         editor.apply();
+    }
+
+    private void showLoadingDialog() {
+        loadingDialog = new Dialog(this);
+        loadingDialog.setContentView(R.layout.dialog_loading);
+        loadingDialog.setCancelable(false);
+        loadingDialog.show();
+    }
+
+    private void hideLoadingDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+        }
     }
 }

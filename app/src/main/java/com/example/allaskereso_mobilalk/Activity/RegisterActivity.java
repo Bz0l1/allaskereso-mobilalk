@@ -1,5 +1,6 @@
 package com.example.allaskereso_mobilalk.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private FirebaseAuth firebaseAuth;
+    private Dialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
         String passwordAgain = passwordConfirmInput.getText().toString();
+        showLoadingDialog();
 
         if (!isValidInput(email, password, passwordAgain)) {
             return;
@@ -58,12 +61,14 @@ public class RegisterActivity extends AppCompatActivity {
                     Log.d(LOG_TAG, "Successful registration");
                     firebaseAuth.signInWithEmailAndPassword(email, password)
                             .addOnSuccessListener(loginSuccess -> {
+                                hideLoadingDialog();
                                 Log.d(LOG_TAG, "Successful login");
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             })
                             .addOnFailureListener(loginFail -> {
+                                hideLoadingDialog();
                                 Log.d(LOG_TAG, "Login failed");
                                 Toast.makeText(RegisterActivity.this, "Login failed, please try again!", Toast.LENGTH_LONG).show();
                             });
@@ -113,5 +118,18 @@ public class RegisterActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(EMAIL_KEY, emailInput.getText().toString());
         editor.apply();
+    }
+
+    private void showLoadingDialog() {
+        loadingDialog = new Dialog(this);
+        loadingDialog.setContentView(R.layout.dialog_loading);
+        loadingDialog.setCancelable(false);
+        loadingDialog.show();
+    }
+
+    private void hideLoadingDialog() {
+        if (loadingDialog != null) {
+            loadingDialog.dismiss();
+        }
     }
 }
